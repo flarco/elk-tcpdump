@@ -1,11 +1,5 @@
 '''
-run locally on pfsense:
-tcpdump -U -i em0 -i em1 -nn -tttt port not 5141 and port not 5140
-get output:
-tcpdump -U -i em0 -i em1 -nn -tttt port not 5141 and port not 5140 | python ~/pfsense_traffic_integration.py
-
-In /etc/crontab:
-*       *       *       *       *       root    /usr/bin/pgrep tcpdump && echo "Already running.." || ( /__/pfsense.tcp.sh & ) > /tmp/pfsense.tcp.log 2>&1
+tcpdump -U -i eth0 -nn -tttt port not 5141 | python ~/pfsense_traffic_integration.py
 '''
 
 import sys, os, re, time, datetime, threading, socket, json
@@ -18,7 +12,9 @@ args = sys.argv[1:]
 utc_delta = datetime.datetime.utcnow() - datetime.datetime.now()
 
 if len(args) < 1:
-  print('USAGE: python tcpdump_aggregate.py "127.0.0.1:5141"')
+  print('USAGE:                python tcpdump_aggregate.py "TARGET_IP:UDP_PORT"')
+  print('EXAMPLE:              python tcpdump_aggregate.py "127.0.0.1:5141"')
+  print('EXAMPLE with tcpdump: tcpdump -U -i eth0 -nn -tttt port not 5141 | python tcpdump_aggregate.py "127.0.0.1:5141"')
   sys.exit(1)
 
 
@@ -244,16 +240,16 @@ def main_buffer():
     if datetime.datetime.now() > time_marker:
       aggregate.send_udp(UDP_IP, UDP_PORT)
       aggregate = Packet_Aggregate()
-      time_marker = datetime.datetime.now() + datetime.timedelta(seconds=SEC_INTERVAL)
+      time_marker = update_time_marker()
     
   
-
-
 try:
   global line_count
   line_count = 0
   main_buffer()
   
+except KeyboardInterrupt:
+    print("Exiting...")
 except:
   print(get_exception_message())
 
