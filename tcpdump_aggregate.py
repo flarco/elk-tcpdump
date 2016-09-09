@@ -168,8 +168,8 @@ def parse_packet(line):
   
 class Packet_Aggregate:
   """An Aggregate of packets with the length/count fields summed.
-  Also has the function to send the aggregate via UDP_IP
-  to as Logstash destination"""
+  Also has the function to send the aggregate via UDP/IP
+  to a Logstash destination"""
   
   UPD_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
   combo_keys = 'source_IP source_PORT target_IP target_PORT type'.split()
