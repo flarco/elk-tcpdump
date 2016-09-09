@@ -1,7 +1,3 @@
-'''
-tcpdump -U -i eth0 -nn -tttt port not 5141 | python ~/pfsense_traffic_integration.py
-'''
-
 import sys, os, re, time, datetime, threading, socket, json
 from subprocess import Popen, PIPE, STDOUT
 from collections import namedtuple, OrderedDict
