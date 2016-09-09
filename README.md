@@ -46,3 +46,9 @@ The `source_HOST` / `target_HOST` fields are resolved by trial (using the linux 
 With this process, we can use Logstash to parse this data and ingest into Elasticsearch, then view in Kibana.
 
 We can use the `logstash.conf` file for this. Make sure to [create the index-template](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html) prior to ingesting in Elasticsearch!
+
+------
+
+Here is an example of Kibana using this data:
+
+![image](https://cloud.githubusercontent.com/assets/7671010/18371213/895bf418-7600-11e6-846d-a70a67efdd13.png)
