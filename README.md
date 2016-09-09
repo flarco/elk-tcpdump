@@ -14,6 +14,12 @@ This was only tested on Ubuntu 14.04. The following packages are required:
 - tcpdump
 - host
 
+Then clone this repo:
+```
+git clone https://github.com/flarco/elk-tcpdump.git
+cd elk-tcpdump
+```
+
 To start collecting tcpdump statistics, run the following on the host:
 ```shell
 tcpdump -U -i eth0 -nn -tttt port not 5141 | python tcpdump_aggregate.py "192.168.2.3:5141"
