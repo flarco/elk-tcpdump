@@ -10,7 +10,7 @@ This is ideal to run on firewalls (such as PfSense) to monitor traffic with a se
 
 # Instructions
 
-This was only tested on Ubuntu 14.04. The following packages are required:
+This was only tested on Ubuntu 14.04 and FreeBSD. The following packages are required:
 - tcpdump
 - host
 
